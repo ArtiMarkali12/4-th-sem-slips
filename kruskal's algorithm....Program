@@ -1,0 +1,56 @@
+#include<stdio.h>
+int c[10][10],visited[10]={0},i,n,j,a,b,u,v,min,mincost=0,e=1,parent[10];
+void main()
+{
+	printf("\n enter limit:");
+	scanf("%d",&n);
+	printf("\n enter graph in matrix format:");
+	for(i=1;i<=n;i++)
+	{
+	for(j=1;j<=n;j++)
+	{
+	scanf("%d",&c[i][j]);
+	if(c[i][j]==0)
+	c[i][j]=999;
+	}
+}
+	//visited[1]=1;
+	printf("\n mst ");
+	for(e=1;e<=n;e++)
+	{
+	for(i=1,min=999;i<=n;i++)
+	for(j=1;j<=n;j++)
+	if(c[i][j]<min)
+	{
+	min=c[i][j];
+	a=u=i;
+	b=v=j;
+	}
+	u=find(u);
+	v=find(v);
+	if(uni(u,v))
+	{
+	printf("\n distance of %d(%d-->%d)cost:%d",e,a,b,min);
+	mincost +=min;
+	//visited[b]=1;
+	}
+	c[a][b]=c[b][a]=999;
+	}
+	printf("\n mincost=%d",mincost);
+	}
+	int find(int i)
+	{
+	while(parent[i])
+	i=parent[i];
+	return i;
+	}
+	int uni(int i,int j)
+	{
+	if(i!=j)
+	{
+	parent[j]=i;
+	return i;
+	}
+	return 0;
+	}
+	
